@@ -8,7 +8,7 @@ export default function Footer() {
       <footer>
         <div className="wrap">
           <div className="foot-grid">
-            <div>
+            <div className="reveal">
               <div className="foot-logo">
                 FLOR<span>ZA</span>
               </div>
@@ -21,7 +21,7 @@ export default function Footer() {
                 <a href="#">in</a>
               </div>
             </div>
-            <div>
+            <div className="reveal">
               <h6>Explore</h6>
               <ul>
                 <li><a href="#categories">Categories</a></li>
@@ -30,7 +30,7 @@ export default function Footer() {
                 <li><a href="#gallery">Gallery</a></li>
               </ul>
             </div>
-            <div>
+            <div className="reveal">
               <h6>Company</h6>
               <ul>
                 <li><a href="#about">About Us</a></li>
@@ -39,7 +39,7 @@ export default function Footer() {
                 <li><a href="#">Careers</a></li>
               </ul>
             </div>
-            <div>
+            <div className="reveal">
               <h6>Newsletter</h6>
               <p style={{ fontSize: "13px", opacity: 0.7, marginBottom: "6px" }}>
                 New collections, first look.

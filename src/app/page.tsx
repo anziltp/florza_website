@@ -2,11 +2,47 @@
 
 import { useEffect, useRef } from "react";
 import Hero from "@/components/Hero";
+import Image from "next/image";
+import basinImg from "@/assets/washbas2/washbas.jpeg";
+import closetImg from "@/assets/toilet.jpeg";
+import faucetImg from "@/assets/washbas2/washbas1.jpeg";
+
+// Category Images
+import cat1 from "@/assets/toilet.jpeg";
+import cat2 from "@/assets/toilet1.jpeg";
+import cat3 from "@/assets/washbas2/washbas.jpeg";
+import cat4 from "@/assets/washbas2/washbas1.jpeg";
+import cat5 from "@/assets/washbas2/washbas2.jpeg";
+import cat6 from "@/assets/washbas2/washbas3.jpeg";
+import cat7 from "@/assets/washbas2/washbas4.jpeg";
+import cat8 from "@/assets/washbas2/washbas5.jpeg";
+
+// Collection Images
+import col1 from "@/assets/washbas2/washbas6.jpeg";
+import col2 from "@/assets/washbas2/washbas7.jpeg";
+import col3 from "@/assets/washbas2/washbas8.jpeg";
+import col4 from "@/assets/washbas2/washbas9.jpeg";
+import col5 from "@/assets/washbas2/washbas10.jpeg";
+import col6 from "@/assets/washbas2/washbas11.jpeg";
+
+// Gallery Images
+import gal1 from "@/assets/washbas2/washbas12.jpeg";
+import gal2 from "@/assets/washbas2/washbas13.jpeg";
+import gal3 from "@/assets/washbas2/washbas14.jpeg";
+import gal4 from "@/assets/washbas2/washbas15.jpeg";
+import gal5 from "@/assets/washbas2/washbas16.jpeg";
+import gal6 from "@/assets/washbas2/washbas17.jpeg";
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
 export default function Home() {
   const inspireBgRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const testiTrackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     // Parallax background for inspire section
     const handleScroll = () => {
       const y = window.scrollY;
@@ -24,53 +60,55 @@ export default function Home() {
       }
     }, 200);
 
-    // Scroll reveal observer
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in");
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    
-    document.querySelectorAll(".reveal, .reveal-scale, .pour").forEach((el) => {
-      if (el.id !== "heroTitle") obs.observe(el);
+    // GSAP ScrollTrigger Batch Animations
+    ScrollTrigger.batch(".reveal", {
+      onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15, duration: 0.8, ease: "power3.out" }),
+      start: "top 85%",
     });
 
-    // Counters observer
-    const counters = document.querySelectorAll(".counter");
-    const counterObs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            const el = e.target as HTMLElement;
-            const target = parseInt(el.dataset.target || "0", 10);
-            let cur = 0;
-            const step = Math.max(1, Math.ceil(target / 40));
-            const t = setInterval(() => {
-              cur += step;
-              if (cur >= target) {
-                cur = target;
-                clearInterval(t);
-              }
-              el.textContent = cur.toString();
-            }, 30);
-            counterObs.unobserve(el);
-          }
+    ScrollTrigger.batch(".reveal-scale", {
+      onEnter: batch => gsap.to(batch, { opacity: 1, scale: 1, stagger: 0.15, duration: 0.8, ease: "back.out(1.2)" }),
+      start: "top 85%",
+    });
+
+    // Counters observer - trigger on scroll
+    ScrollTrigger.create({
+      trigger: ".stats",
+      start: "top 75%",
+      onEnter: () => {
+        const counters = document.querySelectorAll(".counter");
+        counters.forEach((el) => {
+          const target = parseInt((el as HTMLElement).dataset.target || "0", 10);
+          let cur = 0;
+          const step = Math.max(1, Math.ceil(target / 40));
+          const t = setInterval(() => {
+            cur += step;
+            if (cur >= target) {
+              cur = target;
+              clearInterval(t);
+            }
+            el.textContent = cur.toString();
+          }, 40);
         });
       },
-      { threshold: 0.4 }
-    );
-    
-    counters.forEach((c) => counterObs.observe(c));
+      once: true
+    });
+
+    // Testimonials Carousel
+    if (testiTrackRef.current) {
+      const track = testiTrackRef.current;
+      // We assume the track has duplicated content for seamless looping
+      gsap.to(track, {
+        xPercent: -50,
+        ease: "none",
+        duration: 25,
+        repeat: -1
+      });
+    }
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      obs.disconnect();
-      counterObs.disconnect();
+      ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, []);
 
@@ -113,6 +151,7 @@ export default function Home() {
           </div>
           <div className="cat-grid">
             <div className="cat-card reveal">
+              <Image src={cat1} alt="One Piece Closets" fill style={{ objectFit: 'cover', zIndex: 0, opacity: 0.3 }} />
               <div className="glow"></div>
               <svg className="cat-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.4">
                 <rect x="4" y="8" width="16" height="12" rx="2" />
@@ -121,6 +160,7 @@ export default function Home() {
               <div><h4>One Piece Closets</h4><div className="count">48 Products</div></div>
             </div>
             <div className="cat-card reveal">
+              <Image src={cat2} alt="Water Closets" fill style={{ objectFit: 'cover', zIndex: 0, opacity: 0.3 }} />
               <div className="glow"></div>
               <svg className="cat-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.4">
                 <path d="M4 12h16M4 12a8 4 0 0016 0M9 12V6h6v6" />
@@ -128,6 +168,7 @@ export default function Home() {
               <div><h4>Water Closets</h4><div className="count">62 Products</div></div>
             </div>
             <div className="cat-card reveal">
+              <Image src={cat3} alt="Wash Basins" fill style={{ objectFit: 'cover', zIndex: 0, opacity: 0.3 }} />
               <div className="glow"></div>
               <svg className="cat-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.4">
                 <ellipse cx="12" cy="14" rx="8" ry="4" />
@@ -136,6 +177,7 @@ export default function Home() {
               <div><h4>Wash Basins</h4><div className="count">94 Products</div></div>
             </div>
             <div className="cat-card reveal">
+              <Image src={cat4} alt="Counter Top Basins" fill style={{ objectFit: 'cover', zIndex: 0, opacity: 0.3 }} />
               <div className="glow"></div>
               <svg className="cat-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.4">
                 <path d="M3 18h18M6 18V9a2 2 0 012-2h8a2 2 0 012 2v9" />
@@ -143,6 +185,7 @@ export default function Home() {
               <div><h4>Counter Top Basins</h4><div className="count">36 Products</div></div>
             </div>
             <div className="cat-card reveal">
+              <Image src={cat5} alt="Table Top Basins" fill style={{ objectFit: 'cover', zIndex: 0, opacity: 0.3 }} />
               <div className="glow"></div>
               <svg className="cat-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.4">
                 <rect x="3" y="14" width="18" height="4" rx="1" />
@@ -151,6 +194,7 @@ export default function Home() {
               <div><h4>Table Top Basins</h4><div className="count">28 Products</div></div>
             </div>
             <div className="cat-card reveal">
+              <Image src={cat6} alt="Wall Hung Basins" fill style={{ objectFit: 'cover', zIndex: 0, opacity: 0.3 }} />
               <div className="glow"></div>
               <svg className="cat-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.4">
                 <path d="M4 10h16v3a3 3 0 01-3 3H7a3 3 0 01-3-3z" />
@@ -159,6 +203,7 @@ export default function Home() {
               <div><h4>Wall Hung Basins</h4><div className="count">22 Products</div></div>
             </div>
             <div className="cat-card reveal">
+              <Image src={cat7} alt="Bathroom Accessories" fill style={{ objectFit: 'cover', zIndex: 0, opacity: 0.3 }} />
               <div className="glow"></div>
               <svg className="cat-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.4">
                 <circle cx="12" cy="12" r="8" />
@@ -167,6 +212,7 @@ export default function Home() {
               <div><h4>Bathroom Accessories</h4><div className="count">140 Products</div></div>
             </div>
             <div className="cat-card reveal">
+              <Image src={cat8} alt="Faucets" fill style={{ objectFit: 'cover', zIndex: 0, opacity: 0.3 }} />
               <div className="glow"></div>
               <svg className="cat-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.4">
                 <path d="M6 4v6a4 4 0 004 4v6M6 4h4" />
@@ -189,12 +235,7 @@ export default function Home() {
             <div className="prod-card reveal">
               <div className="prod-visual">
                 <span className="badge">Premium</span>
-                <svg width="150" height="150" viewBox="0 0 150 150">
-                  <ellipse cx="75" cy="95" rx="55" ry="20" fill="#F7F3EC" stroke="#B8925A" />
-                  <ellipse cx="75" cy="90" rx="42" ry="16" fill="#EDE6D6" />
-                  <rect x="70" y="35" width="4" height="35" fill="#D4AF37" />
-                  <circle cx="72" cy="32" r="6" fill="#D4AF37" />
-                </svg>
+                <Image src={basinImg} alt="Aurelia Oval Basin" fill style={{ objectFit: 'cover' }} />
               </div>
               <div className="prod-body">
                 <div className="pcat">Wash Basins</div>
@@ -206,10 +247,7 @@ export default function Home() {
             <div className="prod-card reveal">
               <div className="prod-visual">
                 <span className="badge">New</span>
-                <svg width="150" height="150" viewBox="0 0 150 150">
-                  <path d="M35 100 Q35 55 75 55 Q115 55 115 100 L115 104 Q115 118 75 118 Q35 118 35 104 Z" fill="#F7F3EC" stroke="#B8925A" />
-                  <ellipse cx="75" cy="90" rx="34" ry="16" fill="#EDE6D6" />
-                </svg>
+                <Image src={closetImg} alt="Marbella Comfort Closet" fill style={{ objectFit: 'cover' }} />
               </div>
               <div className="prod-body">
                 <div className="pcat">One Piece Closets</div>
@@ -221,12 +259,7 @@ export default function Home() {
             <div className="prod-card reveal">
               <div className="prod-visual">
                 <span className="badge">Bestseller</span>
-                <svg width="150" height="150" viewBox="0 0 150 150">
-                  <rect x="55" y="30" width="10" height="55" fill="#D4AF37" />
-                  <circle cx="60" cy="27" r="9" fill="#D4AF37" />
-                  <path d="M60 40 Q30 55 30 90" stroke="#D4AF37" strokeWidth="5" fill="none" strokeLinecap="round" />
-                  <rect x="20" y="88" width="24" height="8" rx="4" fill="#B8925A" />
-                </svg>
+                <Image src={faucetImg} alt="Regalé Gold Mixer" fill style={{ objectFit: 'cover' }} />
               </div>
               <div className="prod-body">
                 <div className="pcat">Faucets</div>
@@ -250,12 +283,12 @@ export default function Home() {
             <p>Group pieces by mood rather than category — each collection is built to furnish an entire bathroom in one coherent language.</p>
           </div>
           <div className="masonry">
-            <div className="m-item big reveal"><div className="sheen"></div><div><div className="tag">Signature</div><h5>Premium Collection</h5></div></div>
-            <div className="m-item reveal"><div className="sheen"></div><div><div className="tag">Statement</div><h5>Luxury Collection</h5></div></div>
-            <div className="m-item reveal"><div className="sheen"></div><div><div className="tag">Natural Stone</div><h5>Marble Collection</h5></div></div>
-            <div className="m-item reveal"><div className="sheen"></div><div><div className="tag">Warm Finish</div><h5>Golden Collection</h5></div></div>
-            <div className="m-item big reveal"><div className="sheen"></div><div><div className="tag">Contemporary</div><h5>Modern Collection</h5></div></div>
-            <div className="m-item reveal"><div className="sheen"></div><div><div className="tag">Pared Back</div><h5>Minimal Collection</h5></div></div>
+            <div className="m-item big reveal"><Image src={col1} alt="Premium Collection" fill style={{ objectFit: 'cover', zIndex: 0, opacity: 0.4 }} /><div className="sheen"></div><div style={{ position: "relative", zIndex: 2 }}><div className="tag">Signature</div><h5>Premium Collection</h5></div></div>
+            <div className="m-item reveal"><Image src={col2} alt="Luxury Collection" fill style={{ objectFit: 'cover', zIndex: 0, opacity: 0.4 }} /><div className="sheen"></div><div style={{ position: "relative", zIndex: 2 }}><div className="tag">Statement</div><h5>Luxury Collection</h5></div></div>
+            <div className="m-item reveal"><Image src={col3} alt="Marble Collection" fill style={{ objectFit: 'cover', zIndex: 0, opacity: 0.4 }} /><div className="sheen"></div><div style={{ position: "relative", zIndex: 2 }}><div className="tag">Natural Stone</div><h5>Marble Collection</h5></div></div>
+            <div className="m-item reveal"><Image src={col4} alt="Golden Collection" fill style={{ objectFit: 'cover', zIndex: 0, opacity: 0.4 }} /><div className="sheen"></div><div style={{ position: "relative", zIndex: 2 }}><div className="tag">Warm Finish</div><h5>Golden Collection</h5></div></div>
+            <div className="m-item big reveal"><Image src={col5} alt="Modern Collection" fill style={{ objectFit: 'cover', zIndex: 0, opacity: 0.4 }} /><div className="sheen"></div><div style={{ position: "relative", zIndex: 2 }}><div className="tag">Contemporary</div><h5>Modern Collection</h5></div></div>
+            <div className="m-item reveal"><Image src={col6} alt="Minimal Collection" fill style={{ objectFit: 'cover', zIndex: 0, opacity: 0.4 }} /><div className="sheen"></div><div style={{ position: "relative", zIndex: 2 }}><div className="tag">Pared Back</div><h5>Minimal Collection</h5></div></div>
           </div>
         </div>
       </section>
@@ -310,12 +343,12 @@ export default function Home() {
             <p>A look inside homes and hotels finished with Florza fixtures.</p>
           </div>
           <div className="gal-grid">
-            <div className="gal-item tall reveal-scale"><svg viewBox="0 0 200 400"><rect width="200" height="400" fill="#EDE6D6" /><ellipse cx="100" cy="200" rx="60" ry="24" fill="#D4AF37" opacity="0.25" /></svg></div>
-            <div className="gal-item reveal-scale"><svg viewBox="0 0 200 180"><rect width="200" height="180" fill="#E4DCC8" /><rect x="60" y="60" width="80" height="60" fill="#D4AF37" opacity="0.2" /></svg></div>
-            <div className="gal-item reveal-scale"><svg viewBox="0 0 200 180"><rect width="200" height="180" fill="#EFE9DC" /><circle cx="100" cy="90" r="45" fill="#B8925A" opacity="0.2" /></svg></div>
-            <div className="gal-item tall reveal-scale"><svg viewBox="0 0 200 400"><rect width="200" height="400" fill="#E4DCC8" /><rect x="40" y="150" width="120" height="100" fill="#D4AF37" opacity="0.18" /></svg></div>
-            <div className="gal-item reveal-scale"><svg viewBox="0 0 200 180"><rect width="200" height="180" fill="#EDE6D6" /></svg></div>
-            <div className="gal-item reveal-scale"><svg viewBox="0 0 200 180"><rect width="200" height="180" fill="#E9E1CE" /><ellipse cx="100" cy="90" rx="50" ry="20" fill="#B8925A" opacity="0.2" /></svg></div>
+            <div className="gal-item tall reveal-scale"><Image src={gal1} alt="Gallery Space 1" fill style={{ objectFit: 'cover' }} /></div>
+            <div className="gal-item reveal-scale"><Image src={gal2} alt="Gallery Space 2" fill style={{ objectFit: 'cover' }} /></div>
+            <div className="gal-item reveal-scale"><Image src={gal3} alt="Gallery Space 3" fill style={{ objectFit: 'cover' }} /></div>
+            <div className="gal-item tall reveal-scale"><Image src={gal4} alt="Gallery Space 4" fill style={{ objectFit: 'cover' }} /></div>
+            <div className="gal-item reveal-scale"><Image src={gal5} alt="Gallery Space 5" fill style={{ objectFit: 'cover' }} /></div>
+            <div className="gal-item reveal-scale"><Image src={gal6} alt="Gallery Space 6" fill style={{ objectFit: 'cover' }} /></div>
           </div>
         </div>
       </section>
@@ -323,18 +356,23 @@ export default function Home() {
       <div className="seam"></div>
 
       {/* TESTIMONIALS */}
-      <section className="sec" style={{ background: "var(--white)" }}>
+      <section className="sec" style={{ background: "var(--white)", overflow: "hidden" }}>
         <div className="wrap">
           <div className="sec-head reveal">
             <div className="eyebrow">Testimonials</div>
             <h2>What Homeowners & Architects Say</h2>
           </div>
-          <div className="testi-track">
-            <div className="testi-card reveal"><div className="stars">★★★★★</div><p className="quote">"The finish on the Aurelia basin still looks brand new two years on — no staining, no dulling."</p><div className="testi-who"><div className="avatar"></div><div><div className="name">Ritika Menon</div><div className="role">Homeowner, Kochi</div></div></div></div>
-            <div className="testi-card reveal"><div className="stars">★★★★★</div><p className="quote">"We specify Florza across our boutique hotel projects now — the gold-accented line photographs beautifully."</p><div className="testi-who"><div className="avatar"></div><div><div className="name">Arvind Rao</div><div className="role">Principal Architect</div></div></div></div>
-            <div className="testi-card reveal"><div className="stars">★★★★★</div><p className="quote">"Dealer support and delivery timelines have been consistently better than the bigger brands we've used."</p><div className="testi-who"><div className="avatar"></div><div><div className="name">Sana Fathima</div><div className="role">Interior Designer</div></div></div></div>
-            <div className="testi-card reveal"><div className="stars">★★★★★</div><p className="quote">"The Marbella closet's rimless design has made cleaning genuinely effortless for our family."</p><div className="testi-who"><div className="avatar"></div><div><div className="name">Deepak Nair</div><div className="role">Homeowner, Palakkad</div></div></div></div>
-          </div>
+        </div>
+        <div className="testi-track" ref={testiTrackRef} style={{ paddingLeft: "5%" }}>
+          <div className="testi-card"><div className="stars">★★★★★</div><p className="quote">"The finish on the Aurelia basin still looks brand new two years on — no staining, no dulling."</p><div className="testi-who"><div className="avatar"></div><div><div className="name">Ritika Menon</div><div className="role">Homeowner, Kochi</div></div></div></div>
+          <div className="testi-card"><div className="stars">★★★★★</div><p className="quote">"We specify Florza across our boutique hotel projects now — the gold-accented line photographs beautifully."</p><div className="testi-who"><div className="avatar"></div><div><div className="name">Arvind Rao</div><div className="role">Principal Architect</div></div></div></div>
+          <div className="testi-card"><div className="stars">★★★★★</div><p className="quote">"Dealer support and delivery timelines have been consistently better than the bigger brands we've used."</p><div className="testi-who"><div className="avatar"></div><div><div className="name">Sana Fathima</div><div className="role">Interior Designer</div></div></div></div>
+          <div className="testi-card"><div className="stars">★★★★★</div><p className="quote">"The Marbella closet's rimless design has made cleaning genuinely effortless for our family."</p><div className="testi-who"><div className="avatar"></div><div><div className="name">Deepak Nair</div><div className="role">Homeowner, Palakkad</div></div></div></div>
+          {/* Duplicate for seamless loop */}
+          <div className="testi-card"><div className="stars">★★★★★</div><p className="quote">"The finish on the Aurelia basin still looks brand new two years on — no staining, no dulling."</p><div className="testi-who"><div className="avatar"></div><div><div className="name">Ritika Menon</div><div className="role">Homeowner, Kochi</div></div></div></div>
+          <div className="testi-card"><div className="stars">★★★★★</div><p className="quote">"We specify Florza across our boutique hotel projects now — the gold-accented line photographs beautifully."</p><div className="testi-who"><div className="avatar"></div><div><div className="name">Arvind Rao</div><div className="role">Principal Architect</div></div></div></div>
+          <div className="testi-card"><div className="stars">★★★★★</div><p className="quote">"Dealer support and delivery timelines have been consistently better than the bigger brands we've used."</p><div className="testi-who"><div className="avatar"></div><div><div className="name">Sana Fathima</div><div className="role">Interior Designer</div></div></div></div>
+          <div className="testi-card"><div className="stars">★★★★★</div><p className="quote">"The Marbella closet's rimless design has made cleaning genuinely effortless for our family."</p><div className="testi-who"><div className="avatar"></div><div><div className="name">Deepak Nair</div><div className="role">Homeowner, Palakkad</div></div></div></div>
         </div>
       </section>
 
@@ -351,11 +389,14 @@ export default function Home() {
               </p>
               <a className="btn btn-primary" style={{ marginTop: "26px" }}>Download PDF Catalogue</a>
             </div>
-            <div className="cat-book">
-              <svg width="90" height="120" viewBox="0 0 90 120">
-                <rect x="4" y="4" width="82" height="112" rx="4" fill="none" stroke="#D4AF37" strokeWidth="1.5" />
-                <text x="45" y="65" fill="#D4AF37" fontFamily="Plus Jakarta Sans" fontSize="16" textAnchor="middle">FLORZA</text>
-              </svg>
+            <div className="cat-book" style={{ display: "flex", justifyContent: "flex-end", paddingRight: "40px" }}>
+              <Image 
+                src="/images/luxury_bathroom_lifestyle.png" 
+                alt="Florza Catalogue Preview" 
+                width={380} 
+                height={260} 
+                style={{ objectFit: 'cover', borderRadius: '16px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }} 
+              />
             </div>
           </div>
         </div>
@@ -369,13 +410,11 @@ export default function Home() {
           <div className="about-grid">
             <div className="reveal">
               <div className="eyebrow">Our Story</div>
-              <h2 style={{ marginTop: "14px" }}>Fifteen Years Of Quiet Craft</h2>
-              <p style={{ marginTop: "16px", opacity: 0.72, lineHeight: 1.75 }}>Florza began as a small workshop obsessed with the feel of a basin's edge under a fingertip. That obsession scaled into a full manufacturing line — but the standard never changed: if it doesn't feel considered, it doesn't ship.</p>
+              <h2 style={{ marginTop: "14px" }}>A New Standard in Luxury</h2>
+              <p style={{ marginTop: "16px", opacity: 0.72, lineHeight: 1.75 }}>Florza opened its doors just 6 months ago with a singular obsession: to bring unparalleled luxury and modern design to every bathroom. We source and curate only the finest sanitary ware, ensuring that every basin, closet, and fixture meets our exacting standards for quality and aesthetics.</p>
               <div className="timeline">
-                <div className="tl-item"><div className="yr">2011</div><h5>Workshop Founded</h5><p>Started with a single basin mould and a two-person team.</p></div>
-                <div className="tl-item"><div className="yr">2016</div><h5>First Manufacturing Unit</h5><p>Scaled to a dedicated vitreous china facility.</p></div>
-                <div className="tl-item"><div className="yr">2021</div><h5>100+ Dealer Network</h5><p>Expanded distribution across the country.</p></div>
-                <div className="tl-item"><div className="yr">2026</div><h5>Golden Collection Launch</h5><p>Introduced our first PVD-gold accented product line.</p></div>
+                <div className="tl-item"><div className="yr">2026</div><h5>Showroom Launch</h5><p>Opened our premium experience centre to the public.</p></div>
+                <div className="tl-item"><div className="yr">Today</div><h5>Curated Excellence</h5><p>Continuously expanding our collection with the finest modern sanitary ware.</p></div>
               </div>
             </div>
             <div className="about-visual reveal-scale">
@@ -389,30 +428,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTACT */}
-      <section className="sec" id="contact" style={{ background: "var(--white)" }}>
-        <div className="wrap">
-          <div className="sec-head reveal">
-            <div className="eyebrow">Get In Touch</div>
-            <h2>Visit, Call, Or Ask A Question</h2>
-          </div>
-          <div className="contact-grid">
-            <div className="contact-card reveal">
-              <div className="contact-row"><div><div className="lbl">Showroom</div><div className="val">Florza Experience Centre, Ottapalam, Kerala</div></div></div>
-              <div className="contact-row"><div><div className="lbl">Phone</div><div className="val">+91 98765 43210</div></div></div>
-              <div className="contact-row"><div><div className="lbl">Email</div><div className="val">hello@florza.com</div></div></div>
-              <div className="contact-row"><div><div className="lbl">Dealer Enquiry</div><div className="val">dealers@florza.com</div></div></div>
-              <a className="btn btn-primary" style={{ marginTop: "20px", width: "100%", justifyContent: "center", background: "#25D366", color: "#fff" }}>WhatsApp Us</a>
-            </div>
-            <div className="form-card reveal">
-              <div className="form-row"><input placeholder="Full Name" /><input placeholder="Phone Number" /></div>
-              <div className="form-row"><input placeholder="Email Address" style={{ gridColumn: "1/-1" }} /></div>
-              <textarea placeholder="Tell us about your project or product interest..."></textarea>
-              <button className="btn btn-primary submit-btn" style={{ marginTop: "16px" }}>Send Message</button>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

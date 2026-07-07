@@ -26,6 +26,7 @@ export const metadata: Metadata = {
 };
 
 import SmoothScroll from "@/components/SmoothScroll";
+import Preloader from "@/components/Preloader";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -37,6 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakartaSans.variable} ${manrope.variable} ${poppins.variable}`}>
       <body>
+        <Preloader />
         <SmoothScroll>
           <Navbar />
           <main>

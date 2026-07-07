@@ -9,6 +9,7 @@ import Magnetic from "@/components/Magnetic";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,12 +24,21 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Prevent scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [menuOpen]);
+
   return (
     <>
       <div className="progress" id="progress" style={{ width: `${progress}%` }}></div>
-      <header id="header" className={scrolled ? "scrolled" : ""}>
+      <header id="header" className={scrolled || menuOpen ? "scrolled" : ""}>
         <div className="wrap">
-          <Link href="/" className="logo" style={{ display: 'flex', alignItems: 'center' }}>
+          <Link href="/" className="logo" style={{ display: 'flex', alignItems: 'center', zIndex: 205, position: 'relative' }}>
             <Image 
               src={logoImg} 
               alt="FLORZA Logo" 
@@ -44,11 +54,23 @@ export default function Navbar() {
             <Magnetic><Link href="/#about">About</Link></Magnetic>
             <Magnetic><Link href="/#contact">Contact</Link></Magnetic>
           </nav>
-          <Magnetic strength={0.2}>
-            <Link href="/#catalogue" className="nav-cta">
-              Request Catalogue
-            </Link>
-          </Magnetic>
+          <button 
+            className={`mobile-menu-btn ${menuOpen ? "open" : ""}`} 
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle Menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        
+        <div className={`mobile-drawer ${menuOpen ? "open" : ""}`}>
+          <Link href="/products" onClick={() => setMenuOpen(false)}>Products <span>&rarr;</span></Link>
+          <Link href="/#collections" onClick={() => setMenuOpen(false)}>Collections <span>&rarr;</span></Link>
+          <Link href="/#gallery" onClick={() => setMenuOpen(false)}>Gallery <span>&rarr;</span></Link>
+          <Link href="/#about" onClick={() => setMenuOpen(false)}>About <span>&rarr;</span></Link>
+          <Link href="/#contact" onClick={() => setMenuOpen(false)}>Contact <span>&rarr;</span></Link>
         </div>
       </header>
     </>

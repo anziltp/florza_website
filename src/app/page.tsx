@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Hero from "@/components/Hero";
 import Image from "next/image";
 import basinImg from "@/assets/washbas2/washbas.jpeg";
+import logoImg from "@/assets/florza-logo-premium-bathroom-brand1-removebg-preview.png";
 import closetImg from "@/assets/toilet.jpeg";
 import faucetImg from "@/assets/washbas2/washbas1.jpeg";
 
@@ -274,6 +275,34 @@ export default function Home() {
 
       <div className="seam"></div>
 
+      {/* ABOUT */}
+      <section className="sec" id="about">
+        <div className="wrap">
+          <div className="about-grid">
+            <div className="about-visual reveal-scale">
+              <Image 
+                src={logoImg} 
+                alt="FLORZA Logo" 
+                width={260} 
+                style={{ width: '60%', height: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))' }}
+                className="logo-anim"
+              />
+            </div>
+            <div className="reveal">
+              <div className="eyebrow">Our Story</div>
+              <h2 style={{ marginTop: "14px" }}>A New Standard in Luxury</h2>
+              <p style={{ marginTop: "16px", opacity: 0.72, lineHeight: 1.75 }}>Florza opened its doors just 6 months ago with a singular obsession: to bring unparalleled luxury and modern design to every bathroom. We source and curate only the finest sanitary ware, ensuring that every basin, closet, and fixture meets our exacting standards for quality and aesthetics.</p>
+              <div className="timeline">
+                <div className="tl-item"><div className="yr">2026</div><h5>Showroom Launch</h5><p>Opened our premium experience centre to the public.</p></div>
+                <div className="tl-item"><div className="yr">Today</div><h5>Curated Excellence</h5><p>Continuously expanding our collection with the finest modern sanitary ware.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="seam"></div>
+
       {/* COLLECTIONS */}
       <section className="sec dark-sec" id="collections">
         <div className="wrap">
@@ -397,32 +426,6 @@ export default function Home() {
                 height={260} 
                 style={{ objectFit: 'cover', borderRadius: '16px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }} 
               />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div className="seam"></div>
-
-      {/* ABOUT */}
-      <section className="sec" id="about">
-        <div className="wrap">
-          <div className="about-grid">
-            <div className="reveal">
-              <div className="eyebrow">Our Story</div>
-              <h2 style={{ marginTop: "14px" }}>A New Standard in Luxury</h2>
-              <p style={{ marginTop: "16px", opacity: 0.72, lineHeight: 1.75 }}>Florza opened its doors just 6 months ago with a singular obsession: to bring unparalleled luxury and modern design to every bathroom. We source and curate only the finest sanitary ware, ensuring that every basin, closet, and fixture meets our exacting standards for quality and aesthetics.</p>
-              <div className="timeline">
-                <div className="tl-item"><div className="yr">2026</div><h5>Showroom Launch</h5><p>Opened our premium experience centre to the public.</p></div>
-                <div className="tl-item"><div className="yr">Today</div><h5>Curated Excellence</h5><p>Continuously expanding our collection with the finest modern sanitary ware.</p></div>
-              </div>
-            </div>
-            <div className="about-visual reveal-scale">
-              <svg width="70%" viewBox="0 0 200 200">
-                <circle cx="100" cy="100" r="70" fill="none" stroke="#D4AF37" strokeWidth="1" />
-                <circle cx="100" cy="100" r="50" fill="none" stroke="#B8925A" strokeWidth="1" />
-                <text x="100" y="105" fill="#D4AF37" fontFamily="Plus Jakarta Sans" fontSize="18" textAnchor="middle" letterSpacing="2">FLORZA</text>
-              </svg>
             </div>
           </div>
         </div>

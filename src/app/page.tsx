@@ -3,36 +3,36 @@
 import { useEffect, useRef } from "react";
 import Hero from "@/components/Hero";
 import Image from "next/image";
-import basinImg from "@/assets/washbas2/washbas.jpeg";
-import logoImg from "@/assets/florza-logo-premium-bathroom-brand1-removebg-preview.png";
-import closetImg from "@/assets/toilet.jpeg";
-import faucetImg from "@/assets/washbas2/washbas1.jpeg";
+import basinImg from "@/assets/webp_images/washbas23.webp";
+import logoImg from "@/assets/florza-logo-premium-bathroom-brand.webp";
+import closetImg from "@/assets/webp_images/washbas25.webp";
+import faucetImg from "@/assets/webp_images/washbas26.webp";
 
 // Category Images
-import cat1 from "@/assets/toilet.jpeg";
-import cat2 from "@/assets/toilet1.jpeg";
-import cat3 from "@/assets/washbas2/washbas.jpeg";
-import cat4 from "@/assets/washbas2/washbas1.jpeg";
-import cat5 from "@/assets/washbas2/washbas2.jpeg";
-import cat6 from "@/assets/washbas2/washbas3.jpeg";
-import cat7 from "@/assets/washbas2/washbas4.jpeg";
-import cat8 from "@/assets/washbas2/washbas5.jpeg";
+import cat1 from "@/assets/webp_images/washbas1.webp";
+import cat2 from "@/assets/webp_images/washbas2.webp";
+import cat3 from "@/assets/webp_images/washbas3.webp";
+import cat4 from "@/assets/webp_images/washbas4.webp";
+import cat5 from "@/assets/webp_images/washbas5.webp";
+import cat6 from "@/assets/webp_images/washbas6.webp";
+import cat7 from "@/assets/webp_images/washbas7.webp";
+import cat8 from "@/assets/webp_images/washbas8.webp";
 
 // Collection Images
-import col1 from "@/assets/washbas2/washbas6.jpeg";
-import col2 from "@/assets/washbas2/washbas7.jpeg";
-import col3 from "@/assets/washbas2/washbas8.jpeg";
-import col4 from "@/assets/washbas2/washbas9.jpeg";
-import col5 from "@/assets/washbas2/washbas10.jpeg";
-import col6 from "@/assets/washbas2/washbas11.jpeg";
+import col1 from "@/assets/webp_images/washbas9.webp";
+import col2 from "@/assets/webp_images/washbas10.webp";
+import col3 from "@/assets/webp_images/washbas11.webp";
+import col4 from "@/assets/webp_images/washbas13.webp";
+import col5 from "@/assets/webp_images/washbas14.webp";
+import col6 from "@/assets/webp_images/washbas15.webp";
 
 // Gallery Images
-import gal1 from "@/assets/washbas2/washbas12.jpeg";
-import gal2 from "@/assets/washbas2/washbas13.jpeg";
-import gal3 from "@/assets/washbas2/washbas14.jpeg";
-import gal4 from "@/assets/washbas2/washbas15.jpeg";
-import gal5 from "@/assets/washbas2/washbas16.jpeg";
-import gal6 from "@/assets/washbas2/washbas17.jpeg";
+import gal1 from "@/assets/webp_images/washbas16.webp";
+import gal2 from "@/assets/webp_images/washbas17.webp";
+import gal3 from "@/assets/webp_images/washbas18.webp";
+import gal4 from "@/assets/webp_images/washbas19.webp";
+import gal5 from "@/assets/webp_images/washbas20.webp";
+import gal6 from "@/assets/webp_images/washbas22.webp";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";

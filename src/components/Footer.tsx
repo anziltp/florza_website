@@ -56,7 +56,7 @@ export default function Footer() {
       <a
         className="fab"
         title="Chat with us on WhatsApp"
-        href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "918129496502"}?text=${encodeURIComponent(
+        href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919495530519"}?text=${encodeURIComponent(
           process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE ||
           "Hi FLORZA, I'm interested in your premium sanitary ware products. Please share your latest catalogue and pricing."
         )}`}

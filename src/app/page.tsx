@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Hero from "@/components/Hero";
 import Image from "next/image";
 import basinImg from "@/assets/webp_images/washbas23.webp";
-import logoImg from "@/assets/florza-logo-premium-bathroom-brand.webp";
+import logoImg from "@/assets/florza-logo-premium-bathroom-brand1-removebg-preview.png";
 import closetImg from "@/assets/webp_images/washbas25.webp";
 import faucetImg from "@/assets/webp_images/washbas26.webp";
 

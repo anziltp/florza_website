@@ -39,7 +39,7 @@ export default function Footer() {
               <address style={{ fontSize: "13px", opacity: 0.7, fontStyle: "normal", lineHeight: 1.6 }}>
                 <strong>FLORZA SANITARYWARE</strong><br />
                 SHAMAS BUILDING<br />
-                WANDOOR RODE KUTTIYIL<br />
+                WANDOOR ROAD KUTTIYIL<br />
                 WANDOOR 679328<br />
                 MALAPPURAM<br />
                 KERALA

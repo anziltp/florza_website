@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import logoImg from "@/assets/florza-logo-premium-bathroom-brand1-removebg-preview.png";
 import Magnetic from "@/components/Magnetic";
 
@@ -10,6 +11,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,10 +35,12 @@ export default function Navbar() {
     }
   }, [menuOpen]);
 
+  const isScrolledStyle = scrolled || menuOpen || pathname === '/products';
+
   return (
     <>
       <div className="progress" id="progress" style={{ width: `${progress}%` }}></div>
-      <header id="header" className={scrolled || menuOpen ? "scrolled" : ""}>
+      <header id="header" className={isScrolledStyle ? "scrolled" : ""}>
         <div className="wrap">
           <Link href="/" className="logo" style={{ display: 'flex', alignItems: 'center', zIndex: 205, position: 'relative' }}>
             <Image 

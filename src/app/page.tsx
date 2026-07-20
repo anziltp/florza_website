@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Hero from "@/components/Hero";
+import AboutSlider from "@/components/AboutSlider";
 import Image from "next/image";
 import basinImg from "@/assets/webp_images/washbas23.webp";
 import logoImg from "@/assets/florza-logo-premium-bathroom-brand1-removebg-preview.png";
@@ -9,8 +10,8 @@ import closetImg from "@/assets/webp_images/washbas25.webp";
 import faucetImg from "@/assets/webp_images/washbas26.webp";
 
 // Category Images
-import cat1 from "@/assets/webp_images/washbas1.webp";
-import cat2 from "@/assets/webp_images/washbas2.webp";
+import cat1 from "@/assets/webp_images/WhatsApp Image 2026-07-08 at 11.16.13 AM.webp";
+import cat2 from "@/assets/webp_images/washbas15.webp";
 import cat3 from "@/assets/webp_images/washbas3.webp";
 import cat4 from "@/assets/webp_images/washbas4.webp";
 import cat5 from "@/assets/webp_images/washbas5.webp";
@@ -280,13 +281,7 @@ export default function Home() {
         <div className="wrap">
           <div className="about-grid">
             <div className="about-visual reveal-scale">
-              <Image 
-                src={logoImg} 
-                alt="FLORZA Logo" 
-                width={260} 
-                style={{ width: '60%', height: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))' }}
-                className="logo-anim"
-              />
+              <AboutSlider />
             </div>
             <div className="reveal">
               <div className="eyebrow">Our Story</div>

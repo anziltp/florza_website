@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://florza.com/sitemap.xml',
+    sitemap: 'https://www.florza.in/sitemap.xml',
   };
 }

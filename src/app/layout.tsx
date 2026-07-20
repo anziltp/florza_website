@@ -21,7 +21,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://florza.com'),
+  metadataBase: new URL('https://www.florza.in'),
   title: {
     default: "FLORZA | Ultra Premium Luxury Sanitary Ware",
     template: "%s | FLORZA",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FLORZA | Premium Luxury Sanitary Ware",
     description: "Discover the best bathroom products and sanitary ware. Florza brings you premium wash basins, closets, and luxury fittings.",
-    url: "https://florza.com",
+    url: "https://www.florza.in",
     siteName: "FLORZA",
     images: [
       {
@@ -86,6 +86,9 @@ export const metadata: Metadata = {
     apple: "/apple-icon.png",
   },
   manifest: "/manifest.json",
+  alternates: {
+    canonical: "https://www.florza.in",
+  },
 };
 
 import SmoothScroll from "@/components/SmoothScroll";
@@ -102,9 +105,9 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
     "name": "FLORZA Sanitary Ware",
-    "url": "https://florza.com",
-    "logo": "https://florza.com/icon.png",
-    "image": "https://florza.com/og-image.jpg",
+    "url": "https://www.florza.in",
+    "logo": "https://www.florza.in/icon.png",
+    "image": "https://www.florza.in/og-image.jpg",
     "description": "Best bathroom products and sanitary shop in Malappuram and Wandoor. We offer premium sanitary ware, wash basins, and luxury bathroom fittings.",
     "address": {
       "@type": "PostalAddress",
@@ -116,7 +119,7 @@ export default function RootLayout({
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer support",
-      "email": "info@florza.com"
+      "email": "info@florza.in"
     }
   };
 

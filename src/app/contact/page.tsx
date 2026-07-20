@@ -26,7 +26,7 @@ export default function ContactPage() {
               Kerala, India<br />
             </address>
             <div className="mt-4">
-              <a href="mailto:info@florza.com" className="text-primary hover:underline">info@florza.com</a>
+              <a href="mailto:info@florza.in" className="text-primary hover:underline">info@florza.in</a>
             </div>
           </div>
         </section>
